@@ -3,10 +3,10 @@
     xmlns:oo="http://www.omnigroup.com/namespace/OmniOutliner/v3"
     exclude-result-prefixes="oo"
     >
-    
+
     <xsl:output method='text' encoding='utf-8'/>
     <xsl:strip-space elements="*" />
-    
+
     <xsl:template match="/">
         <xsl:apply-templates select="oo:outline/oo:root"/>
 	</xsl:template>
@@ -25,10 +25,16 @@
 		</xsl:if>
 	</xsl:template>
 
-
     <xsl:template match="oo:children">
         <xsl:apply-templates select="oo:item"/>
     </xsl:template>
+
+    <xsl:template match="oo:note/oo:text/oo:p">
+        <xsl:apply-templates select="oo:run/oo:style"/>
+        <xsl:apply-templates select="oo:run/oo:lit"/>
+<xsl:text>
+</xsl:text>
+	</xsl:template>
 
     <xsl:template match="oo:run/oo:style">
     </xsl:template>
@@ -41,12 +47,5 @@
     <xsl:template match="oo:cell">
         <xsl:value-of select="@name"/>
     </xsl:template>
-
-    <xsl:template match="oo:note/oo:text/oo:p">
-        <xsl:apply-templates select="oo:run/oo:style"/>
-        <xsl:apply-templates select="oo:run/oo:lit"/>
-<xsl:text>
-</xsl:text>
-	</xsl:template>
 
 </xsl:stylesheet>
